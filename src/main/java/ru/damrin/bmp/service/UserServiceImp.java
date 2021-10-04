@@ -28,4 +28,32 @@ public class UserServiceImp implements UserService, UserDetailsService {
         return repository.findByEmail(s);
     }
 
+    @Override
+    public void updateUser(User user) {
+        repository.save(user);
+    }
+
+    @Override
+    public void updateUserPassword(User user, String newPassword) {
+        user.setPassword(newPassword);
+        repository.save(user);
+    }
+
+    @Override
+    public void updateUserFirstName(User user, String newFirstName) {
+        user.setFirstName(newFirstName);
+        repository.save(user);
+    }
+
+    @Override
+    public void updateUserLastName(User user, String newLastName) {
+        user.setLastName(newLastName);
+        repository.save(user);
+    }
+
+    @Override
+    public void updateUserTelephone(User user, Integer newTelephoneNumber) {
+        user.setTelephone(newTelephoneNumber);
+        repository.save(user);
+    }
 }
