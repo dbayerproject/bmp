@@ -160,4 +160,25 @@ create table if not exists ORDER_ITEMS
         foreign key (PRODUCT_ID) references PRODUCT (ID)
 );
 
+create table if not exists ROLE
+(
+    ID            INT NOT NULL PRIMARY KEY ,
+    ROLE          VARCHAR NOT NULL
+);
+insert into ROLE values
+                     (1, 'ROLE_OWNER'),
+                     (2, 'ROLE_ADMIN'),
+                     (3, 'ROLE_MANAGER'),
+                     (4, 'ROLE_ACCOUNTANT'),
+                     (5, 'ROLE_CLIENT');
+
+create table if not exists USER_ROLE
+(
+    USERID      INT NOT NULL,
+    ROLEID      INT NOT NULL,
+    PRIMARY KEY (USERID, ROLEID),
+    FOREIGN KEY (USERID) REFERENCES USER(ID),
+    FOREIGN KEY (ROLEID) REFERENCES ROLE (ID),
+    );
+
 
