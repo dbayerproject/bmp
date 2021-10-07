@@ -1,5 +1,6 @@
 package ru.damrin.bmp.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.FormHttpMessageConverter;
@@ -20,6 +21,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 
+import ru.damrin.bmp.config.vk.CustomOAuth2UserService;
 import ru.damrin.bmp.config.vk.CustomTokenResponseConverter;
 
 
@@ -27,15 +29,28 @@ import ru.damrin.bmp.config.vk.CustomTokenResponseConverter;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final CustomOAuth2UserService customOAuth2UserService;
+
+    @Autowired
+    public SecurityConfig(CustomOAuth2UserService customOAuth2UserService) {
+        this.customOAuth2UserService = customOAuth2UserService;
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http
+                .csrf().disable()
                 .formLogin()
                 .and()
                 .oauth2Login()
                 //Access token Endpoint
                 .tokenEndpoint()
-                .accessTokenResponseClient(accessTokenResponseClient());
+                .accessTokenResponseClient(accessTokenResponseClient())
+                //Userinfo endpoint
+                .and()
+                .userInfoEndpoint()
+                .userService(customOAuth2UserService);
     }
 
     @Bean
