@@ -8,9 +8,9 @@ import java.util.List;
 public interface CategoryService {
     public List<CategoryDTO> findAllDto();
     public List<Category> findAllCategories();
-    public Category findOne(int id);
-    public Category addCategory(CategoryDTO category);
+    public CategoryDTO findOne(int id);
+    public CategoryDTO addCategory(CategoryDTO category);
     public void deleteCategory(int id);
-    public Category updateCategory(int id, CategoryDTO category);
-    public Category findByCategoryName(String name);
+    public CategoryDTO updateCategory(int id, CategoryDTO category);
+    public CategoryDTO findByCategoryName(String name);
 }
