@@ -54,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(12);
     }
-
+    
     @Bean // необходим для авторизации в VK. замена accessTokenType=null на BEARER
     public OAuth2AccessTokenResponseClient<OAuth2AuthorizationCodeGrantRequest> accessTokenResponseClient() {
         DefaultAuthorizationCodeTokenResponseClient accessTokenResponseClient =
@@ -69,3 +69,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return accessTokenResponseClient;
     }
 }
+
