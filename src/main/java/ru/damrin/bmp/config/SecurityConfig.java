@@ -41,9 +41,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/**").authenticated()
+                .and()
                 .formLogin()
                 .and()
                 .oauth2Login()
+
                 //Access token Endpoint
                 .tokenEndpoint()
                 .accessTokenResponseClient(accessTokenResponseClient())
