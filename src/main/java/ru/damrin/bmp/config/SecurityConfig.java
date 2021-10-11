@@ -33,20 +33,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.detailsService = detailsService;
     }
 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
 
+                .authorizeRequests()
 
+                    .antMatchers("/")
+                    .permitAll()
 
+                    .antMatchers("/admin/**")
+                    .hasAuthority( "ROLE_ADMIN")
 
+                .anyRequest()
+                    .authenticated()
 
-                .formLogin()
+                .and()
+                    .formLogin()
                     .loginPage("/login")
-                    .and()
+                    .permitAll()
 
-                .logout()
+                .and()
+                    .logout()
                     .permitAll();
     }
 
