@@ -21,6 +21,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.LinkedMultiValueMap;
@@ -36,7 +37,7 @@ public class OAuthTest {
     private static final String GOOGLE_TEST_PASS = "hfCskxWWridr3DKLQZfK";
     private static final String GOOGLE_CLIENT_ID = "1047401721972-naq4i8jl0su7iguvgam0bh5egi2vb9h0.apps.googleusercontent.com";
     private static final String GOOGLE_CLIENT_SECRET = "RIrYeCnwsFqj7gvcChTITY4g";
-    private static final String CONTENT_TYPE = "application/json;charset=UTF-8";
+    private static final String CONTENT_TYPE = "application/x-www-form-urlencoded";
 
     @Autowired
     MockMvc mockMvc;
@@ -72,20 +73,22 @@ public class OAuthTest {
 
     @Test
     public void googleOAuthTest() throws Exception {
-/*        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("grant_type", "password");
-        params.add("client_id", GOOGLE_CLIENT_ID);
+        params.add("client_id",GOOGLE_CLIENT_ID);
+        params.add("client_secret",GOOGLE_CLIENT_SECRET);
         params.add("username", GOOGLE_TEST_EMAIL);
-        params.add("password", GOOGLE_TEST_PASS);*/
-/*
-        this.mockMvc.perform(post("/oauth2/authorization/google")
-                        .params(params)
-                        .with(httpBasic(GOOGLE_CLIENT_ID,GOOGLE_CLIENT_SECRET))
-                        .accept(CONTENT_TYPE))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(CONTENT_TYPE));*/
+        params.add("password", GOOGLE_TEST_PASS);
 
-        this.mockMvc.perform(get("/oauth/token")
-                .with(oauth2Login())).andDo(print());
+//        this.mockMvc.perform(post("/oauth2/token")
+        this.mockMvc.perform(post("https://accounts.google.com/o/oauth2/token")
+                        .params(params)
+                        .accept(CONTENT_TYPE)
+                        )
+                .andDo(print())
+//                .andExpect(status().isOk())
+                .andExpect(content().contentType(CONTENT_TYPE));
+
+
     }
 }
