@@ -16,21 +16,7 @@ public class Product {
     private String sku;
     private Double price;
 
-/*    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", referencedColumnName = "id")
-    private Category category;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "discount_id", referencedColumnName = "id")
-    private Discount discount;
-    @ManyToOne
-    @JoinColumn(name = "inventory_id", referencedColumnName = "id")
-    private Inventory inventory;
-
- */
-
-
     public Product() {
-
     }
 
     public Product(Integer id, String name, String description, String sku, Double price) {
@@ -41,18 +27,6 @@ public class Product {
         this.price = price;
     }
 
-  /*  public Product(Integer id, String name, String description, String sku, Double price, Category category, Discount discount, Inventory inventory) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.sku = sku;
-        this.price = price;
-        this.category = category;
-        this.discount = discount;
-        this.inventory = inventory;
-    }
-
-   */
 
     public Product(String name, String description, String sku, Double price) {
         this.name = name;
@@ -64,41 +38,6 @@ public class Product {
     public ProductDTO toDTO() {
         return new ProductDTO(id, name, description, sku, price);
     }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
- /*   public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public Discount getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(Discount discount) {
-        this.discount = discount;
-    }
-
-    public Inventory getInventory() {
-        return inventory;
-    }
-
-    public void setInventory(Inventory inventory) {
-        this.inventory = inventory;
-    }
-
-  */
-
 
     public void setId(Integer id) {
         this.id = id;
