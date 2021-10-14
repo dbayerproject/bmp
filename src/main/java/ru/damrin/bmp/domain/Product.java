@@ -16,7 +16,7 @@ public class Product {
     private String sku;
     private Double price;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+/*    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
     @ManyToOne(fetch = FetchType.LAZY)
@@ -25,6 +25,8 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "inventory_id", referencedColumnName = "id")
     private Inventory inventory;
+
+ */
 
 
     public Product() {
@@ -39,7 +41,7 @@ public class Product {
         this.price = price;
     }
 
-    public Product(Integer id, String name, String description, String sku, Double price, Category category, Discount discount, Inventory inventory) {
+  /*  public Product(Integer id, String name, String description, String sku, Double price, Category category, Discount discount, Inventory inventory) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -49,6 +51,8 @@ public class Product {
         this.discount = discount;
         this.inventory = inventory;
     }
+
+   */
 
     public Product(String name, String description, String sku, Double price) {
         this.name = name;
@@ -69,7 +73,7 @@ public class Product {
         this.description = description;
     }
 
-    public Category getCategory() {
+ /*   public Category getCategory() {
         return category;
     }
 
@@ -92,6 +96,8 @@ public class Product {
     public void setInventory(Inventory inventory) {
         this.inventory = inventory;
     }
+
+  */
 
 
     public void setId(Integer id) {
