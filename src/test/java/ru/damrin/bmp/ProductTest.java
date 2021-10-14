@@ -113,14 +113,13 @@ public class ProductTest {
         product.setDesc("Interesting");
         product.setSku("dontknow");
         product.setPrice(35.0);
-        Optional<Product> ofResult = Optional.of(product);
-        when(this.productRepository.findById(anyInt())).thenReturn(ofResult);
+        when(this.productRepository.findByName(any())).thenReturn(product);
         ProductDTO result = this.productService.getProductByName("Book");
         assertEquals(1, result.getId());
         assertEquals("Book", result.getName());
         assertEquals("Interesting", result.getDescription());
         assertEquals("dontknow", result.getSku());
         assertEquals(35.0, result.getPrice());
-        verify(this.productRepository).findById(anyInt());
+        verify(this.productRepository).findByName(any());
     }
 }
