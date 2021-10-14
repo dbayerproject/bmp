@@ -7,7 +7,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ru.damrin.bmp.dao.ProductRepository;
 import ru.damrin.bmp.dto.ProductDTO;
-import ru.damrin.bmp.model.Product;
+import ru.damrin.bmp.domain.Product;
 import ru.damrin.bmp.service.ProductServiceImpl;
 
 import java.util.Optional;

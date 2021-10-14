@@ -1,6 +1,6 @@
 package ru.damrin.bmp.dto;
 
-import ru.damrin.bmp.model.Product;
+import ru.damrin.bmp.domain.Product;
 
 public class ProductDTO {
     private Integer id;

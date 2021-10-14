@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.damrin.bmp.dto.ProductDTO;
-import ru.damrin.bmp.model.Product;
+import ru.damrin.bmp.domain.Product;
 import ru.damrin.bmp.service.ProductService;
 
 import java.util.List;

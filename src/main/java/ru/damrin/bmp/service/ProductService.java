@@ -2,7 +2,7 @@ package ru.damrin.bmp.service;
 
 import org.springframework.stereotype.Service;
 import ru.damrin.bmp.dto.ProductDTO;
-import ru.damrin.bmp.model.Product;
+import ru.damrin.bmp.domain.Product;
 
 import java.util.List;
 

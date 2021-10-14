@@ -1,4 +1,4 @@
-package ru.damrin.bmp.model;
+package ru.damrin.bmp.domain;
 
 import ru.damrin.bmp.dto.ProductDTO;
 

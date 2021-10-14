@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.damrin.bmp.dao.ProductRepository;
 import ru.damrin.bmp.dto.ProductDTO;
-import ru.damrin.bmp.model.Product;
+import ru.damrin.bmp.domain.Product;
 
 import java.util.List;
 import java.util.stream.Collectors;
