@@ -124,5 +124,5 @@ class CategoryRestControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
-
 }
+
