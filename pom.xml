@@ -31,7 +31,6 @@
         </dependency>
 
         <dependency>
-<<<<<<< HEAD
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
@@ -49,11 +48,11 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>2.9.2</version>
             <scope>compile</scope>
-=======
+        </dependency>
+        <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
->>>>>>> main
         </dependency>
     </dependencies>
 
