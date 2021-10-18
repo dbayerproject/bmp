@@ -23,7 +23,7 @@ public class UserRestController {
         return new ResponseEntity<>(user.getUsername(), HttpStatus.OK);
     }
 
-    @PutMapping("/updateUsername")
+    @PutMapping("/updateUsername/{id}")
     public ResponseEntity<UserDTO> updateUsername(@RequestBody UserDTO userDTO) {
         return new ResponseEntity<>(userService.updateUsername(userDTO, userDTO.getUsername()).toUserDTO(), HttpStatus.OK);
     }
@@ -64,6 +64,7 @@ public class UserRestController {
         return new ResponseEntity<>(userService.updateUserLastName(userDTO, userDTO.getLastName()).toUserDTO(),
                 HttpStatus.OK);
     }
+
     @GetMapping("/telephone/{id}")
     public ResponseEntity<Integer> getTelephone(@PathVariable int id) {
         User user = userService.findById(id);

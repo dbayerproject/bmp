@@ -57,5 +57,4 @@ public class UserServiceImpl implements UserService {
         userDTO.setTelephone(telephone);
         return userRepository.save(user);
     }
-
 }
