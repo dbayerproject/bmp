@@ -22,17 +22,17 @@ public class CategoryRestController {
 
     @GetMapping("/categories/{id}")
     public ResponseEntity<CategoryDTO> oneCategory(@PathVariable int id) {
-        return new ResponseEntity<>(categoryService.findOne(id).toCategoryDTO(), HttpStatus.OK);
+        return new ResponseEntity<>(categoryService.findOne(id), HttpStatus.OK);
     }
 
     @PostMapping("/categories")
     public ResponseEntity<CategoryDTO> newCategory(@RequestBody CategoryDTO categoryDTO) {
-        return new ResponseEntity<>(categoryService.addCategory(categoryDTO).toCategoryDTO(), HttpStatus.CREATED);
+        return new ResponseEntity<>(categoryService.addCategory(categoryDTO), HttpStatus.CREATED);
     }
 
     @PutMapping("/categories/{id}")
     public ResponseEntity<CategoryDTO> updateCategory(@PathVariable int id, @RequestBody CategoryDTO categoryDTO){
-       return new ResponseEntity<>(categoryService.updateCategory(id, categoryDTO).toCategoryDTO(), HttpStatus.OK);
+        return new ResponseEntity<>(categoryService.updateCategory(id, categoryDTO), HttpStatus.OK);
     }
 
     @DeleteMapping("/categories/{id}")
