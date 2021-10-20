@@ -51,9 +51,10 @@ public class UserServiceTest {
     void updateUsernameTest(){
         User user = new User();
         user.setUsername("username");
-        String username = user.getUsername();
-        when(this.userRepository.findByName(any())).thenReturn(user);
-        User result = this.userRepository.findByName(username);
+        user.setId(1);
+        Optional<User> optionalUser = Optional.of(user);
+        when(this.userRepository.findById(anyInt())).thenReturn(optionalUser);
+        User result = this.userService.findById(1);
         assertEquals("username", result.getUsername());
         user.setUsername("another name");
         assertEquals("another name", result.getUsername());

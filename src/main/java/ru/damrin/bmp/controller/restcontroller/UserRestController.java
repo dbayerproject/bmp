@@ -23,7 +23,7 @@ public class UserRestController {
         return new ResponseEntity<>(user.getUsername(), HttpStatus.OK);
     }
 
-    @PutMapping("/updateUsername/{id}")
+    @PutMapping("/updateUsername/")
     public ResponseEntity<UserDTO> updateUsername(@RequestBody UserDTO userDTO) {
         return new ResponseEntity<>(userService.updateUsername(userDTO, userDTO.getUsername()).toUserDTO(), HttpStatus.OK);
     }

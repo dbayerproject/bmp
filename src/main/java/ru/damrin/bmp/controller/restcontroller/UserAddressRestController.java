@@ -107,7 +107,7 @@ public class UserAddressRestController {
         return new ResponseEntity<>(mobile, HttpStatus.OK);
     }
 
-    @PatchMapping("/userAddress/telephone/update/{id}")
+    @PatchMapping("/userAddress/mobile/update/{id}")
     public ResponseEntity<Integer> updateMobile(@PathVariable int id) {
         int mobile = userAddressService.findMobile(id);
         return new ResponseEntity<>(userAddressService
