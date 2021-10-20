@@ -27,17 +27,17 @@ import ru.damrin.bmp.config.vk.CustomTokenResponseConverter;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-  
+
     private final CustomOAuth2UserService customOAuth2UserService;
 
     @Autowired
     public SecurityConfig(CustomOAuth2UserService customOAuth2UserService) {
         this.customOAuth2UserService = customOAuth2UserService;
     }
-  
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
+        //Добавил defaultSuccessUrl и контроллер. Авторизация стала выдавать саксесс
         http
                 .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .and()
@@ -45,12 +45,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**").authenticated()
                 .and()
                 .formLogin()
+                .defaultSuccessUrl("/hello")
                 .and()
                 .oauth2Login()
-
+                .defaultSuccessUrl("/hellouser")
                 //Access token Endpoint
                 .tokenEndpoint()
+
                 .accessTokenResponseClient(accessTokenResponseClient())
+
                 //Userinfo endpoint
                 .and()
                 .userInfoEndpoint()
@@ -74,7 +77,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(12);
     }
-    
+
     @Bean // необходим для авторизации в VK. замена accessTokenType=null на BEARER
     public OAuth2AccessTokenResponseClient<OAuth2AuthorizationCodeGrantRequest> accessTokenResponseClient() {
         DefaultAuthorizationCodeTokenResponseClient accessTokenResponseClient =
