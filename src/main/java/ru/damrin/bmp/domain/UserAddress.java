@@ -11,7 +11,7 @@ public class UserAddress {
 
     @Id
     @GeneratedValue
-    @Column(name = "id")
+    @Column(name = "user_adress_id")
     private int id;
 
     @Column
@@ -31,6 +31,8 @@ public class UserAddress {
     private String country;
 
     private int telephone;
+
+    private  String emptyTelephone;
 
     private int mobile;
 
@@ -130,6 +132,14 @@ public class UserAddress {
 
     public void setTelephone(int telephone) {
         this.telephone = telephone;
+    }
+
+    public void setEmptyTelephone() {
+        emptyTelephone = "";
+    }
+
+    public String getEmptyTelephone() {
+        return emptyTelephone;
     }
 
     public int getMobile() {

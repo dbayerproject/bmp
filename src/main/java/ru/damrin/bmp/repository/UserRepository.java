@@ -5,5 +5,6 @@ import ru.damrin.bmp.domain.User;
 
 
 public interface UserRepository  extends JpaRepository<User, Integer>{
+    User findByName(String name);
 
 }

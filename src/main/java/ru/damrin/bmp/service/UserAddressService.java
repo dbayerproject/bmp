@@ -1,6 +1,11 @@
 package ru.damrin.bmp.service;
 
+import ru.damrin.bmp.domain.User;
+import ru.damrin.bmp.domain.UserAddress;
+
 public interface UserAddressService {
+
+    UserAddress findById(int id);
     String findAddressLine1(int id);
     String updateAddressLine1(int id, String addressLine1);
     String findAddressLine2(int id);

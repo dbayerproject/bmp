@@ -3,7 +3,10 @@ package ru.damrin.bmp.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.damrin.bmp.domain.UserAddress;
+import ru.damrin.bmp.exceptions.UserNotFoundException;
 import ru.damrin.bmp.repository.UserAddressRepository;
+
+import java.util.Optional;
 
 
 @Service
@@ -14,6 +17,11 @@ public class UserAddressServiceImpl implements UserAddressService {
     @Autowired
     public UserAddressServiceImpl(UserAddressRepository userAddressRepository) {
         this.userAddressRepository = userAddressRepository;
+    }
+
+    @Override
+    public UserAddress findById(int id) {
+        return (userAddressRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id)));
     }
 
     @Override
@@ -97,7 +105,7 @@ public class UserAddressServiceImpl implements UserAddressService {
     @Override
     public void deleteTelephone(int id) {
         UserAddress userAddress = userAddressRepository.getById(id);
-        userAddress.setTelephone(0);
+        userAddress.setEmptyTelephone();
         userAddressRepository.save(userAddress);
     }
 
