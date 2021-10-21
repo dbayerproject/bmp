@@ -118,7 +118,7 @@ public class UserAddressServiceTest {
         UserAddress result = this.userAddressService.findById(1);
         assertEquals(123456, result.getPostalCode());
         userAddress.setPostalCode(654321);
-        assertEquals(123456, result.getPostalCode());
+        assertEquals(654321, result.getPostalCode());
     }
 
     @Test
@@ -141,7 +141,7 @@ public class UserAddressServiceTest {
         when(this.userAddressRepository.findById(anyInt())).thenReturn(userAddressOptional);
         UserAddress result = this.userAddressService.findById(1);
         assertEquals("Country", result.getCountry());
-        userAddress.setCity("another_country");
+        userAddress.setCountry("another_country");
         assertEquals("another_country", result.getCountry());
     }
 
@@ -200,7 +200,7 @@ public class UserAddressServiceTest {
         when(this.userAddressRepository.findById(anyInt())).thenReturn(userAddressOptional);
         UserAddress result = this.userAddressService.findById(1);
         assertEquals(123456, result.getMobile());
-        userAddress.setTelephone(654321);
+        userAddress.setMobile(654321);
         assertEquals(654321, result.getMobile());
     }
 }
