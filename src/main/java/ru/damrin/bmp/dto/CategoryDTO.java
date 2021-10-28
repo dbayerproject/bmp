@@ -1,6 +1,10 @@
 package ru.damrin.bmp.dto;
-
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
 import ru.damrin.bmp.domain.Category;
+import springfox.documentation.annotations.ApiIgnore;
+
+
 
 public class CategoryDTO {
     private int id;
