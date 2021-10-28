@@ -2,6 +2,7 @@ Feature: Testing a category REST API with Karate
   Background:Testing Logging in FormLogin with csrf
     * def testUrl = 'http://localhost:8080/categories'
     Given url 'http://localhost:8080/login'
+
     When method GET
     * def token = responseCookies['XSRF-TOKEN']
     * print token.value
