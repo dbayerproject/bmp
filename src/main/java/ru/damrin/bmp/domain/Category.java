@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Table(name = "product_category")
 @SQLDelete(sql = "UPDATE product_category SET deleted = true WHERE category_id = ?")
 @Where(clause = "deleted=false")
-@ApiModel(value = "Category", description = "Category has name, sky etc...")
+@ApiModel (description = "Category has name, sky etc...")
 public class Category extends BaseTimeEntity {
 
     @Id
