@@ -24,8 +24,7 @@ public class ProductController {
     @ApiOperation(value = "Returns all products")
     @GetMapping("/product")
     public ResponseEntity<List<Product>> getAllProducts() {
-        System.out.println("А когда тест запускаем");
-        return ResponseEntity.ok().body(productService.getProductList());
+       return ResponseEntity.ok().body(productService.getProductList());
     }
 
     @ApiOperation(value = "Returns one product")
@@ -37,8 +36,7 @@ public class ProductController {
     @ApiOperation(value = "Create product")
     @PostMapping("/product")
     public ResponseEntity<ProductDTO> create(@RequestBody ProductDTO productDTO){
-        System.out.println("when working Post method/create");
-        return new ResponseEntity<>(productService.createProduct(productDTO), HttpStatus.OK);
+         return new ResponseEntity<>(productService.createProduct(productDTO), HttpStatus.OK);
 }
 
     @ApiOperation(value = "Update  product")
