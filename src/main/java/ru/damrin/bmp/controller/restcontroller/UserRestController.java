@@ -31,11 +31,11 @@ public class UserRestController {
     }
 
 
-    @PostMapping("reg")
-    public ResponseEntity<UserDTO> saveUser(UserDTO userDTO) {
-        userService.enPass(userDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(userDTO);
-    }
+//    @PostMapping("reg")
+//    public ResponseEntity<UserDTO> saveUser(UserDTO userDTO) {
+//        userService.enPass(userDTO);
+//        return ResponseEntity.status(HttpStatus.CREATED).body(userDTO);
+//    }
 
     @PostMapping("save")
     public ResponseEntity<UserDTO> addUser(@RequestBody UserDTO userDTO) {

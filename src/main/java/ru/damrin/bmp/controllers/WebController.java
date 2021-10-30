@@ -31,27 +31,27 @@ public class WebController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping("/login")
-    public String hello() {
-
-        if (userService.findByUsername("admin") == null) {
-            if (roleService.findAll().isEmpty()) {
-                roleService.add(new Role("ROLE_ADMIN"));
-            }
-            Set<Role> adminRoles = Stream.of(roleService.getByName("ROLE_ADMIN")).collect(Collectors.toSet());
-            User admin = new User("admin", "admin", "admin@admin.com", "Admin", "Adminov", "88002005555", adminRoles);
-            admin.setPassword(passwordEncoder.encode(admin.getPassword()));
-            userService.saveUser(admin);
-        }
-        return "login";
-    }
+//    @GetMapping("/login")
+//    public String hello() {
+//
+//        if (userService.findByUsername("admin") == null) {
+//            if (roleService.findAll().isEmpty()) {
+//                roleService.add(new Role("ROLE_ADMIN"));
+//            }
+//            Set<Role> adminRoles = Stream.of(roleService.getByName("ROLE_ADMIN")).collect(Collectors.toSet());
+//            User admin = new User("admin", "admin", "admin@admin.com", "Admin", "Adminov", "88002005555", adminRoles);
+//            admin.setPassword(passwordEncoder.encode(admin.getPassword()));
+//            userService.saveUser(admin);
+//        }
+//        return "login";
+//    }
 
     @GetMapping("/registration")
     public String helloUser(Model model, UserDTO userForm) {
         model.addAttribute("userForm", userForm);
         return "registration";
     }
-    @GetMapping("/admin")
+    @GetMapping("/")
     public String  adminPage(){
         return "admin";
     }

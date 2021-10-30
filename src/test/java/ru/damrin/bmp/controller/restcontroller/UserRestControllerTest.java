@@ -50,7 +50,7 @@ class UserRestControllerTest {
 
     @Test
     void saveUser() {
-        ResponseEntity<UserDTO> responseEntity = userRestController.saveUser(user);
+        ResponseEntity<UserDTO> responseEntity = userRestController.addUser(user);
 
         Assertions.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 
