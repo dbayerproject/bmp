@@ -4,77 +4,99 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.FormHttpMessageConverter;
-
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.endpoint.DefaultAuthorizationCodeTokenResponseClient;
 import org.springframework.security.oauth2.client.endpoint.OAuth2AccessTokenResponseClient;
 import org.springframework.security.oauth2.client.endpoint.OAuth2AuthorizationCodeGrantRequest;
 import org.springframework.security.oauth2.client.http.OAuth2ErrorResponseErrorHandler;
 import org.springframework.security.oauth2.core.http.converter.OAuth2AccessTokenResponseHttpMessageConverter;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.client.RestTemplate;
-import java.util.Arrays;
+import ru.damrin.bmp.config.handler.LoginSuccessHandler;
 import ru.damrin.bmp.config.vk.CustomOAuth2UserService;
 import ru.damrin.bmp.config.vk.CustomTokenResponseConverter;
 
+import java.util.Arrays;
+
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(securedEnabled=true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-  
+
     private final CustomOAuth2UserService customOAuth2UserService;
+    private final LoginSuccessHandler loginSuccessHandler;
+    private final UserDetailsService userDetailsService;
 
     @Autowired
-    public SecurityConfig(CustomOAuth2UserService customOAuth2UserService) {
+    public SecurityConfig(CustomOAuth2UserService customOAuth2UserService, LoginSuccessHandler loginSuccessHandler, UserDetailsService userDetailsService) {
         this.customOAuth2UserService = customOAuth2UserService;
+        this.loginSuccessHandler = loginSuccessHandler;
+        this.userDetailsService = userDetailsService;
     }
-  
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
 
         http
                 .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .and()
-                .authorizeRequests()
-                .antMatchers("/**").authenticated()
-                .and()
                 .formLogin()
+                .loginPage("/login")
+                .successHandler(loginSuccessHandler)
+                .loginProcessingUrl("/login")
+                .usernameParameter("login")
+                .passwordParameter("password")
+                .permitAll()
                 .and()
-                .oauth2Login()
+                 //Доступ
+                .authorizeRequests()
+                .antMatchers("/registration").anonymous()
+                .antMatchers("/reg").anonymous()
+                .antMatchers("/**").authenticated()
+                .antMatchers("/delete/*").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/admin").access("hasRole('ROLE_ADMIN')");
 
-                //Access token Endpoint
-                .tokenEndpoint()
-                .accessTokenResponseClient(accessTokenResponseClient())
-                //Userinfo endpoint
-                .and()
-                .userInfoEndpoint()
-                .userService(customOAuth2UserService);
+
+
+      //  Вещи для авторизации через гугл. Надеюсь чинить их не мне
+//                .and()
+//                .oauth2Login()
+//                .defaultSuccessUrl("/registration")
+//                //Access token Endpoint
+//                .tokenEndpoint()
+//                .accessTokenResponseClient(accessTokenResponseClient());
+
+
+        http.logout()
+                .permitAll()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login");
+
+
+
 
     }
+
 
     @Bean
-    @Override
-    protected UserDetailsService userDetailsService() {
-        return new InMemoryUserDetailsManager(
-                User.builder()
-                        .username("admin")
-                        .password(passwordEncoder().encode("admin"))
-                        .roles("ADMIN")
-                        .build()
-        );
+    public static BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
-
     @Bean
-    protected PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(12);
+    public DaoAuthenticationProvider daoAuthenticationProvider() {
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+        authenticationProvider.setPasswordEncoder(passwordEncoder());
+        authenticationProvider.setUserDetailsService(userDetailsService);
+        return authenticationProvider;
     }
-    
     @Bean // необходим для авторизации в VK. замена accessTokenType=null на BEARER
     public OAuth2AccessTokenResponseClient<OAuth2AuthorizationCodeGrantRequest> accessTokenResponseClient() {
         DefaultAuthorizationCodeTokenResponseClient accessTokenResponseClient =
