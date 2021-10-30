@@ -20,10 +20,9 @@ import org.springframework.security.oauth2.core.http.converter.OAuth2AccessToken
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.client.RestTemplate;
+import java.util.Arrays;
 import ru.damrin.bmp.config.vk.CustomOAuth2UserService;
 import ru.damrin.bmp.config.vk.CustomTokenResponseConverter;
-
-import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -90,4 +89,3 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return accessTokenResponseClient;
     }
 }
-
