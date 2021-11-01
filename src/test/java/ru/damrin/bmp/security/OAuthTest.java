@@ -71,24 +71,4 @@ public class OAuthTest {
                 .andExpect(redirectedUrl("/"));
     }
 
-    @Test
-    public void googleOAuthTest() throws Exception {
-        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        params.add("grant_type", "password");
-        params.add("client_id",GOOGLE_CLIENT_ID);
-        params.add("client_secret",GOOGLE_CLIENT_SECRET);
-        params.add("username", GOOGLE_TEST_EMAIL);
-        params.add("password", GOOGLE_TEST_PASS);
-
-//        this.mockMvc.perform(post("/oauth2/token")
-        this.mockMvc.perform(post("https://accounts.google.com/o/oauth2/token")
-                        .params(params)
-                        .accept(CONTENT_TYPE)
-                        )
-                .andDo(print())
-//                .andExpect(status().isOk())
-                .andExpect(content().contentType(CONTENT_TYPE));
-
-
-    }
 }
