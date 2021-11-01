@@ -26,12 +26,12 @@ import ru.damrin.bmp.config.vk.CustomTokenResponseConverter;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfigd extends WebSecurityConfigurerAdapter {
 
     private final CustomOAuth2UserService customOAuth2UserService;
 
     @Autowired
-    public SecurityConfig(CustomOAuth2UserService customOAuth2UserService) {
+    public SecurityConfigd(CustomOAuth2UserService customOAuth2UserService) {
         this.customOAuth2UserService = customOAuth2UserService;
     }
 
