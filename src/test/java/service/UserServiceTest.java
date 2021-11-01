@@ -112,23 +112,23 @@ public class UserServiceTest {
     void getUserTelephoneTest() {
         User user = new User();
         user.setId(1);
-        user.setTelephone(12345);
+        user.setTelephone("12345");
         Optional<User> optionalUser = Optional.of(user);
         when(this.userRepository.findById(anyInt())).thenReturn(optionalUser);
         User result = this.userService.findById(1);
-        assertEquals(12345, result.getTelephone());
+        assertEquals("12345", result.getTelephone());
     }
 
     @Test
     void updateUserTelephoneTest() {
         User user = new User();
         user.setId(1);
-        user.setTelephone(12345);
+        user.setTelephone("12345");
         Optional<User> optionalUser = Optional.of(user);
         when(this.userRepository.findById(anyInt())).thenReturn(optionalUser);
         User result = this.userService.findById(1);
-        assertEquals(12345, result.getTelephone());
-        user.setTelephone(54321);
-        assertEquals(54321, result.getTelephone());
+        assertEquals("12345", result.getTelephone());
+        user.setTelephone("54321");
+        assertEquals("54321", result.getTelephone());
     }
 }
