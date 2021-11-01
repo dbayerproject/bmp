@@ -1,5 +1,5 @@
 Feature: Testing a category REST API with Karate
-  Background: Testing logging in Form with csrf
+  Background: Testing logging in FormLogin with csrf
     Given url 'http://localhost:8080/login'
     * def testUrl1 = 'http://localhost:8080/save'
     * def testUrl2 = 'http://localhost:8080/user/1'
