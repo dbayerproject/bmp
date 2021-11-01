@@ -27,13 +27,13 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category findOne(int id) {
-        return categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException(id));
+    public CategoryDTO findOne(int id) {
+        return (categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException(id))).toCategoryDTO();
     }
 
     @Override
-    public Category addCategory(CategoryDTO categoryDTO) {
-        return categoryRepository.save(categoryDTO.toEntity());
+    public CategoryDTO addCategory(CategoryDTO categoryDTO) {
+        return (categoryRepository.save(categoryDTO.toEntity())).toCategoryDTO();
     }
 
     @Override
@@ -42,14 +42,14 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category updateCategory(int id, CategoryDTO categoryDTO) {
+    public CategoryDTO updateCategory(int id, CategoryDTO categoryDTO) {
         Category category = categoryDTO.toEntity();
         category.setId(id);
-        return categoryRepository.save(category);
+        return (categoryRepository.save(category)).toCategoryDTO();
     }
 
     @Override
-    public Category findByCategoryName(String name) {
-        return categoryRepository.findByName(name);
+    public CategoryDTO findByCategoryName(String name) {
+        return (categoryRepository.findByName(name)).toCategoryDTO();
     }
 }
