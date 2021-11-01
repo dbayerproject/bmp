@@ -9,7 +9,6 @@ Feature: Testing Api product controller
     Given url 'http://localhost:8080/login'
     Given form field username = 'admin'
     Given form field password = 'admin'
-
     When method POST
     * def token = responseCookies['XSRF-TOKEN']
     * print token.value
@@ -23,12 +22,15 @@ Feature: Testing Api product controller
     Then status 201
 
   Scenario: Testing Get User
+    Given header X-XSRF-TOKEN = token.value
+
     Given url 'http://localhost:8080/user/1'
     When method GET
     Then status 200
     And match $ contains { id:#notnull, username:'adery', password:#notnull, email:'misha@admin.com',firstName:'Misha',lastName:'Mishalov',telephone:'88'}
 
   Scenario: Testing DELETE user
+
     Given url testUrl = 'http://localhost:8080/delete/1'
     Given header X-XSRF-TOKEN = token.value
     When method DELETE
