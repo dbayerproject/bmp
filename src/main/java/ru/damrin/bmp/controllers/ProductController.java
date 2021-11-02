@@ -1,5 +1,7 @@
 package ru.damrin.bmp.controllers;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +11,7 @@ import ru.damrin.bmp.service.ProductService;
 
 import java.util.List;
 
+@Api(value = "Show products", description = "Show products")
 @RestController
 public class ProductController {
 
@@ -18,26 +21,32 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/product/all")
+    @ApiOperation(value = "Returns all products")
+    @GetMapping("/product")
     public ResponseEntity<List<Product>> getAllProducts() {
-        return ResponseEntity.ok().body(productService.getProductList());
+       return ResponseEntity.ok().body(productService.getProductList());
     }
 
+    @ApiOperation(value = "Returns one product")
     @GetMapping("/product/{id}")
     public ResponseEntity<ProductDTO> show(@PathVariable Integer id) {
         return new ResponseEntity<>(productService.getProductById(id), HttpStatus.OK);
     }
-    @PostMapping("/product/create")
+
+    @ApiOperation(value = "Create product")
+    @PostMapping("/product")
     public ResponseEntity<ProductDTO> create(@RequestBody ProductDTO productDTO){
-        return new ResponseEntity<>(productService.createProduct(productDTO), HttpStatus.OK);
+         return new ResponseEntity<>(productService.createProduct(productDTO), HttpStatus.OK);
 }
 
-    @PutMapping("/product/update/{id}")
+    @ApiOperation(value = "Update  product")
+    @PutMapping("/product/{id}")
     public ResponseEntity<ProductDTO> update(@RequestBody ProductDTO productDTO, @PathVariable Integer id) {
         return new ResponseEntity<>(productService.updateProduct(id, productDTO), HttpStatus.OK);
     }
 
-    @DeleteMapping("/product/delete/{id}")
+    @ApiOperation(value = "Delete product")
+    @DeleteMapping("/product/{id}")
     public ResponseEntity<ProductDTO> deleteUser(@PathVariable Integer id) {
         productService.deleteProduct(id);
         return new ResponseEntity<>(HttpStatus.OK);

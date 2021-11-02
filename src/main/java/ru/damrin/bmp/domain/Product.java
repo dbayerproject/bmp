@@ -1,11 +1,14 @@
 package ru.damrin.bmp.domain;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
 import ru.damrin.bmp.dto.ProductDTO;
 
 import javax.persistence.*;
 
 @Entity
 @Table
+@ApiModel(description = "Product has name, sky etc...")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

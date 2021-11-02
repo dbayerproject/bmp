@@ -1,5 +1,7 @@
 package ru.damrin.bmp.domain;
 
+
+import io.swagger.annotations.ApiModel;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import ru.damrin.bmp.common.BaseTimeEntity;
@@ -7,10 +9,12 @@ import ru.damrin.bmp.dto.CategoryDTO;
 
 import javax.persistence.*;
 
+
 @Entity
 @Table(name = "product_category")
 @SQLDelete(sql = "UPDATE product_category SET deleted = true WHERE category_id = ?")
 @Where(clause = "deleted=false")
+@ApiModel (description = "Category has name, sky etc...")
 public class Category extends BaseTimeEntity {
 
     @Id

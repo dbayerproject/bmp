@@ -1,6 +1,8 @@
 package ru.damrin.bmp.dto;
 
 import ru.damrin.bmp.domain.Product;
+import springfox.documentation.annotations.ApiIgnore;
+
 
 public class ProductDTO {
     private Integer id;
